@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Skočko</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="icon"  href="images/favicon.ico">
+  </head>
+  <body onload="generateCombination()">
+    <h1>Skočko</h1>
+    <div class="logo">
+        <img src="images/unnamed.png" class="imgSize">
+    </div>
+            <div class="column-1">
+                <table>
+                    <tr>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                    </tr>
+                    <tr>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                      <td class="column-left" align="center"></td>
+                    </tr>
+                    <tr>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                    </tr>
+                    <tr>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>  
+                    </tr>
+                    <tr>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>  
+                    </tr>
+                    <tr>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                        <td class="column-left" align="center"></td>
+                      </tr>
+                  </table>   
+            </div>
+            <div class="column-2">
+                <table>
+                    <tr>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                    </tr>
+                    <tr>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                      <td class="column-right" align="center"></td>
+                    </tr>
+                    <tr>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                    </tr>
+                    <tr>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>  
+                    </tr>
+                    <tr>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>  
+                    </tr>
+                    <tr>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                        <td class="column-right" align="center"></td>
+                      </tr>
+                  </table>
+            </div>
+            <div class="column-1">
+                <div id="floatLeft">
+                    <figure class="snip1325"> <img src="images/smiley.png" alt="smiley" class="symbol imgSize" value="0"></figure>
+                </div>
+                <div id="floatLeft">
+                    <figure class="snip1325"><img src="images/heart.png" alt="heart" class="symbol imgSize" value="1"></figure>
+                </div>
+                <div id="floatLeft">
+                    <figure class="snip1325"><img src="images/diamond.png" alt="diamond" class="symbol imgSize" value="2"></figure>
+                </div>
+                <div id="floatLeft">
+                    <figure class="snip1325"><img src="images/clubs.png" alt="club" class="symbol imgSize" value="3"></figure>
+                </div>
+                <div id="floatLeft">
+                    <figure class="snip1325"><img src="images/spade.png" alt="spade" class="symbol imgSize" value="4"></figure>
+                </div>
+                <div id="floatLeft">
+                    <figure class="snip1325"><img src="images/star.png" alt="star" class="symbol imgSize" value="5"></figure>
+                </div>
+            </div>
+            <div class="column-2">
+                <div class="delete">
+                    <figure class="snip1325"><img src="images/trash.png" alt="delete" class="trash imgSize" onclick="deleteItem()"></figure>
+                </div>
+            </div>
+            <div class="column-3">
+                <a onclick="comparingCombinations()" class="confirm btn btn-5">Potvrdi ?</a>
+                <a onclick="comparingCombinations()" class="btn btn-5" style="margin-left: 1%;">Nova Igra</a> 
+            </div> 
+            <script src="script.js"></script>
+  </body>
+</html>
