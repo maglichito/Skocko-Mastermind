@@ -17,7 +17,7 @@ var indexRight = 0;
 var indexBefore = 0;
 var numbersGotPairJ = new Array(4);
 var numbersGotPairI = new Array(4);
-var ifWon = false;
+var ifEnd = false;
 
 const playAudio = function(){
         var audio = $(".audio");
@@ -37,7 +37,7 @@ const newGame = function () {
     indexLeft = 0;
     indexRight = 0;
     indexBefore = 0;
-    ifWon = false;
+    ifEnd = false;
     clearArray(numbersGotPairJ);
     clearArray(numbersGotPairI);
     for (i = 0; i < leftColumn.length; i++) {
@@ -64,7 +64,7 @@ const addItem = function (column, symbol, index) {
 
 // Deleting symbols
 const deleteItem = function () {
-    if(ifWon === true){
+    if(ifEnd === true){
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
@@ -117,7 +117,7 @@ const fillFinalCombination = function () {
 }
 // Comparing random generating and user combination
 const comparingCombinations = function () {
-    if(ifWon === true){
+    if(ifEnd === true){
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
@@ -142,6 +142,7 @@ const comparingCombinations = function () {
     }
     paintRightRow();
     if (indexLeft == leftColumn.length) {
+        ifEnd = true;
         fillFinalCombination();
     }
 }
@@ -180,18 +181,18 @@ const paintRightRow = function () {
     indexRight += (4 - colored) + colored;
     if (coloredRed === 4) {
         fillFinalCombination();
-        ifWon = true;
+        ifEnd = true;
         return;
     }
 }
 // Adding events to all images
 images.forEach(element => {
     element.addEventListener('click', () => {
-        if(ifWon === true){
+        if(ifEnd === true){
             alert("Igra je zavresna zapocnite novu igru!");
             return;
         }
-        if (indexLeft != leftColumn.length) {
+        if (indexLeft < indexBefore+4) {
             switch (parseInt(element.getAttribute("value"))) {
                 case 0:
                     addItem(leftColumn, "smiley", indexLeft);
