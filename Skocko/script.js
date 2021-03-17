@@ -23,10 +23,10 @@ var numbersGotPairI = new Array(4);
 var ifEnd = false;
 
 // Play audio
-const playAudio = function(){
-        var audio = $(".audio");
-        audio.volume = .3;
-        audio.play();
+const playAudio = function () {
+    var audio = $(".audio");
+    audio.volume = .3;
+    audio.play();
 }
 // Reset Columns
 const resetColumns = function (column, index) {
@@ -38,6 +38,7 @@ const resetColumns = function (column, index) {
 
 // New game
 const newGame = function () {
+    playAudio();
     indexLeft = 0;
     indexRight = 0;
     indexBefore = 0;
@@ -51,7 +52,7 @@ const newGame = function () {
     for (i = 0; i < finalCombination.length; i++) {
         resetColumns(finalCombination, i);
     }
-    generateCombination();
+    generate();
 }
 
 // Adding symbols
@@ -68,14 +69,14 @@ const addItem = function (column, symbol, index) {
 
 // Deleting symbols
 const deleteItem = function () {
-    if(ifEnd === true){
+    playAudio();
+    if (ifEnd === true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
     if (indexLeft > indexBefore) {
         resetColumns(leftColumn, indexLeft - 1)
         indexLeft--;
-        playAudio();
     } else {
         console.log("All elements are already deleted.");
         alert("Obrisao si vec sve elemente!");
@@ -89,12 +90,12 @@ const deleteItem = function () {
 // 3 - Club
 // 4 - Spade
 // 5 - Star
-const generateCombination = function () {
+const generate = function () {
     for (i = 0; i < randomCombination.length; i++) {
         let randomNumber = Math.floor(Math.random() * 6);
         randomCombination[i] = randomNumber;
     }
-    console.log(randomCombination);
+    console.log(randomCombination)
 }
 
 // Filling array for final combination
@@ -122,9 +123,10 @@ const fillFinalCombination = function () {
         }
     }
 }
-// Comparing random generating and user combination
-const comparingCombinations = function () {
-    if(ifEnd === true){
+// Comparing random generated and user combination
+const calculate = function () {
+    playAudio();
+    if (ifEnd === true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
@@ -140,9 +142,8 @@ const comparingCombinations = function () {
                     numbersGotPairJ[j] = true;
                     numbersGotPairI[i] = true;
                     break;
-                } else if (numbersGotPairJ[j] == null && numbersGotPairI[i] == null) {
+                } else if (numbersGotPairJ[j] == null) {
                     numbersGotPairJ[j] = false;
-                    break;
                 }
             }
         }
@@ -153,14 +154,14 @@ const comparingCombinations = function () {
         fillFinalCombination();
     }
 }
-// Used to clear array
+// Clearing arrays
 const clearArray = function (Array) {
     for (i = 0; i < Array.length; i++) {
         Array[i] = null;
     }
 }
 
-// Paint right side columns
+// Helping method for paintRightRow()
 const paint = function (color, index) {
     rightColumn[index].style.backgroundColor = color;
     rightColumn[index].style.opacity = 1;
@@ -169,10 +170,11 @@ const paint = function (color, index) {
 
 // Paint right row
 const paintRightRow = function () {
+    console.log(resultCombination);
     let coloredRed = 0;
     let colored = indexRight;
     for (i = 0; i < resultCombination.length; i++) {
-        if (numbersGotPairJ[i] === true) {
+        if (numbersGotPairJ[i] === true && numbersGotPairI[i] === true) {
             paint("red", colored);
             coloredRed++;
             colored++;
@@ -197,11 +199,11 @@ const paintRightRow = function () {
 // Adding events to all images
 images.forEach(element => {
     element.addEventListener('click', () => {
-        if(ifEnd === true){
+        if (ifEnd === true) {
             alert("Igra je zavresna zapocnite novu igru!");
             return;
         }
-        if (indexLeft < indexBefore+4) {
+        if (indexLeft < indexBefore + 4) {
             switch (parseInt(element.getAttribute("value"))) {
                 case 0:
                     addItem(leftColumn, "smiley", indexLeft);

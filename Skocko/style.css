@@ -6,7 +6,7 @@
     vertical-align: baseline;
     font-family: 'Bangers', cursive;
 }
-html{
+html,body{
     background: url(images/bg.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -116,5 +116,5 @@ td{
   .snip1325:hover img,
   .snip1325.hover img {
     -webkit-transform: translateY(5px);
-    transform: translateY(5px);
+    transform: translateY(5px); 
 }
