@@ -1,17 +1,20 @@
 const $ = e => document.querySelector(e);
 const $$ = d => document.querySelectorAll(d);
 
+
 const leftColumn = $$('.column-left');
 const rightColumn = $$('.column-right');
 const images = $$('.symbol');
+const finalCombination = $$('.column-final');
 const trash = $('.trash');
 const confirm = $('.confirm');
-const finalCombination = $$('.column-final');
+
+
 const randomCombination = new Array(4);
 const resultCombination = new Array(4);
 const userCombination = new Array(4);
 
-// Position to add symbol
+
 var indexLeft = 0;
 var indexRight = 0;
 var indexBefore = 0;
@@ -19,6 +22,7 @@ var numbersGotPairJ = new Array(4);
 var numbersGotPairI = new Array(4);
 var ifEnd = false;
 
+// Play audio
 const playAudio = function(){
         var audio = $(".audio");
         audio.volume = .3;
@@ -71,6 +75,7 @@ const deleteItem = function () {
     if (indexLeft > indexBefore) {
         resetColumns(leftColumn, indexLeft - 1)
         indexLeft--;
+        playAudio();
     } else {
         console.log("All elements are already deleted.");
         alert("Obrisao si vec sve elemente!");
@@ -91,6 +96,8 @@ const generateCombination = function () {
     }
     console.log(randomCombination);
 }
+
+// Filling array for final combination
 const fillFinalCombination = function () {
     for (i = 0; i < finalCombination.length; i++) {
         switch (randomCombination[i]) {
@@ -159,6 +166,8 @@ const paint = function (color, index) {
     rightColumn[index].style.opacity = 1;
     rightColumn[index].style.border = "none";
 }
+
+// Paint right row
 const paintRightRow = function () {
     let coloredRed = 0;
     let colored = indexRight;
