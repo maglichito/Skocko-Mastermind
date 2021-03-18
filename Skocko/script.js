@@ -29,8 +29,7 @@ const playAudio = function () {
 // Reset Columns
 const resetColumns = function (column, index) {
     column[index].style.backgroundImage = "none";
-    column[index].style.opacity = .2;
-    column[index].style.border = "1px solid white";
+    column[index].style.opacity = .2;    
     column[index].style.backgroundColor = "rgb(20, 19, 19)";
 }
 
@@ -60,7 +59,6 @@ const addItem = function (column, symbol, index) {
         column[index].style.backgroundRepeat = "norepeat";
         column[index].style.backgroundSize = "cover";
         column[index].style.backgroundColor = "rgba(171, 183, 183, 1)";
-        column[index].style.border = "none";
         column[index].style.backgroundImage = "url('images/" + symbol + ".png')";
     }
 }
