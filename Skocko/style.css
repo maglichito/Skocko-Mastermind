@@ -53,16 +53,16 @@ span{
 tr,td{
     color: white;
     border-radius: 10rem;
-    height: 9vh;
-    width: 5.5rem;
+    height: 7vh;
+    width: 4.2rem;
 }
 td{
     background-color: rgb(20, 19, 19);
     opacity: .2;
 }
 .imgSize{
-    height: 6vh;
-    width: 3.7rem;
+    height: 4vh;
+    width: 2.4rem;
     margin-top: 2vh;
     display: block;
 }
