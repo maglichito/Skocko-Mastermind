@@ -11,15 +11,13 @@ const confirm = $('.confirm');
 
 
 const randomCombination = new Array(4);
-const resultCombination = new Array(4);
 const userCombination = new Array(4);
+const copyOfRandom = new Array(4);
 
 
 var indexLeft = 0;
 var indexRight = 0;
 var indexBefore = 0;
-var numbersGotPairJ = new Array(4);
-var numbersGotPairI = new Array(4);
 var ifEnd = false;
 
 // Play audio
@@ -39,12 +37,12 @@ const resetColumns = function (column, index) {
 // New game
 const newGame = function () {
     playAudio();
+
     indexLeft = 0;
     indexRight = 0;
     indexBefore = 0;
     ifEnd = false;
-    clearArray(numbersGotPairJ);
-    clearArray(numbersGotPairI);
+
     for (i = 0; i < leftColumn.length; i++) {
         resetColumns(leftColumn, i);
         resetColumns(rightColumn, i);
@@ -70,6 +68,7 @@ const addItem = function (column, symbol, index) {
 // Deleting symbols
 const deleteItem = function () {
     playAudio();
+
     if (ifEnd === true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
@@ -78,7 +77,6 @@ const deleteItem = function () {
         resetColumns(leftColumn, indexLeft - 1)
         indexLeft--;
     } else {
-        console.log("All elements are already deleted.");
         alert("Obrisao si vec sve elemente!");
     }
 }
@@ -94,13 +92,14 @@ const generate = function () {
     for (i = 0; i < randomCombination.length; i++) {
         let randomNumber = Math.floor(Math.random() * 6);
         randomCombination[i] = randomNumber;
+        copyOfRandom[i] = randomNumber;
     }
-    console.log(randomCombination)
+    console.log(randomCombination + " DO NOT CHEAT!");
 }
 
 // Filling array for final combination
 const fillFinalCombination = function () {
-    for (i = 0; i < finalCombination.length; i++) {
+    for (let i = 0; i < finalCombination.length; i++) {
         switch (randomCombination[i]) {
             case 0:
                 addItem(finalCombination, "smiley", i);
@@ -134,16 +133,23 @@ const calculate = function () {
         alert("Popunite sva polja!");
         return;
     }
-    console.log(userCombination);
-    for (i = 0; i < userCombination.length; i++) {
-        for (j = 0; j < randomCombination.length; j++) {
-            if (userCombination[i] === randomCombination[j]) {
-                if (i === j && numbersGotPairJ[j] != true && numbersGotPairI[i] != true) {
-                    numbersGotPairJ[j] = true;
-                    numbersGotPairI[i] = true;
+    // RED
+    for (let i = 0; i < userCombination.length; i++) {
+        for (let j = 0; j < copyOfRandom.length; j++) {
+            if (i === j && userCombination[i] === randomCombination[j]) {
+                copyOfRandom[j] = -1;
+                userCombination[i] = -1;
+                break;
+            }
+        }
+    }
+    // YELLOW
+    for (let i = 0; i < userCombination.length; i++) {
+        for (let j = 0; j < copyOfRandom.length; j++) {
+            if (userCombination[i] != -1 && copyOfRandom[j] != -1) {
+                if (userCombination[i] === randomCombination[j]) {
+                    copyOfRandom[j] = -2;
                     break;
-                } else if (numbersGotPairJ[j] == null) {
-                    numbersGotPairJ[j] = false;
                 }
             }
         }
@@ -154,10 +160,10 @@ const calculate = function () {
         fillFinalCombination();
     }
 }
-// Clearing arrays
-const clearArray = function (Array) {
-    for (i = 0; i < Array.length; i++) {
-        Array[i] = null;
+// Reset arrays
+const resetArray = function (Array) {
+    for (let i = 0; i < Array.length; i++) {
+        copyOfRandom[i] = Array[i];
     }
 }
 
@@ -170,26 +176,29 @@ const paint = function (color, index) {
 
 // Paint right row
 const paintRightRow = function () {
-    console.log(resultCombination);
     let coloredRed = 0;
     let colored = indexRight;
-    for (i = 0; i < resultCombination.length; i++) {
-        if (numbersGotPairJ[i] === true && numbersGotPairI[i] === true) {
+
+    // If equal -1 paint red
+    for (let i = 0; i < copyOfRandom.length; i++) {
+        if (copyOfRandom[i] === -1) {
             paint("red", colored);
             coloredRed++;
             colored++;
         }
     }
-    for (i = 0; i < resultCombination.length; i++) {
-        if (numbersGotPairJ[i] === false) {
+    // If equal -2 paint yellow
+    for (let i = 0; i < copyOfRandom.length; i++) {
+        if (copyOfRandom[i] === -2) {
             paint("yellow", colored);
             colored++;
         }
     }
-    clearArray(numbersGotPairJ);
-    clearArray(numbersGotPairI);
+    resetArray(randomCombination);
+
     indexBefore += 4;
     indexRight += (4 - colored) + colored;
+
     if (coloredRed === 4) {
         fillFinalCombination();
         ifEnd = true;
