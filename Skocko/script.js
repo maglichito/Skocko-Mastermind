@@ -16,6 +16,7 @@ var indexLeft = 0;
 var indexRight = 0;
 var indexBefore = 0;
 var ifEnd = false;
+var ifWon = false;
 
 // Play audio
 function playAudio (audio) {
@@ -37,6 +38,7 @@ const newGame = function () {
     indexRight = 0;
     indexBefore = 0;
     ifEnd = false;
+    ifWon = false;
 
     for (i = 0; i < leftColumn.length; i++) {
         resetColumns(leftColumn, i);
@@ -61,7 +63,7 @@ const addItem = function (column, symbol, index) {
 const deleteItem = function () {
     playAudio("buttonSound");
 
-    if (ifEnd === true) {
+    if (ifEnd == true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
@@ -115,7 +117,7 @@ const fillFinalCombination = function () {
 // Comparing random generated and user combination
 const calculate = function () {
     playAudio("buttonSound");
-    if (ifEnd === true) {
+    if (ifEnd == true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
     }
@@ -126,7 +128,7 @@ const calculate = function () {
     // RED
     for (let i = 0; i < userCombination.length; i++) {
         for (let j = 0; j < copyOfRandom.length; j++) {
-            if (i === j && userCombination[i] === randomCombination[j]) {
+            if (i == j && userCombination[i] == randomCombination[j]) {
                 copyOfRandom[j] = -1;
                 userCombination[i] = -1;
                 break;
@@ -137,7 +139,7 @@ const calculate = function () {
     for (let i = 0; i < userCombination.length; i++) {
         for (let j = 0; j < copyOfRandom.length; j++) {
             if (userCombination[i] != -1 && copyOfRandom[j] != -1 && userCombination[i] != -2 && copyOfRandom[j] != -2) {
-                if (userCombination[i] === randomCombination[j]) {
+                if (userCombination[i] == randomCombination[j]) {
                     copyOfRandom[j] = -2;
                     userCombination[i] = -2;
                     break;
@@ -147,7 +149,9 @@ const calculate = function () {
     }
     paintRightRow();
     if (indexLeft == leftColumn.length) {
-        playAudio("loseSound");
+        if(ifWon == false){
+            playAudio("loseSound");
+        }
         ifEnd = true;
         fillFinalCombination();
     }
@@ -171,7 +175,7 @@ const paintRightRow = function () {
 
     // If equal -1 paint red
     for (let i = 0; i < copyOfRandom.length; i++) {
-        if (copyOfRandom[i] === -1) {
+        if (copyOfRandom[i] == -1) {
             paint("red", colored);
             coloredRed++;
             colored++;
@@ -179,7 +183,7 @@ const paintRightRow = function () {
     }
     // If equal -2 paint yellow
     for (let i = 0; i < copyOfRandom.length; i++) {
-        if (copyOfRandom[i] === -2) {
+        if (copyOfRandom[i] == -2) {
             paint("yellow", colored);
             colored++;
         }
@@ -190,17 +194,18 @@ const paintRightRow = function () {
     indexBefore += 4;
     indexRight += (4 - colored) + colored;
 
-    if (coloredRed === 4) {
+    if (coloredRed == 4) {
         fillFinalCombination();
         playAudio("correctSound");
         ifEnd = true;
+        ifWon = true;
         return;
     }
 }
 // Adding events to all images
 images.forEach(element => {
     element.addEventListener('click', () => {
-        if (ifEnd === true) {
+        if (ifEnd == true) {
             alert("Igra je zavresna zapocnite novu igru!");
             return;
         }
