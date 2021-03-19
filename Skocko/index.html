@@ -14,10 +14,7 @@
 </head>
 
 <body onload="generate()">
-    <h1>Skočko</h1>
-    <div class="logo">
-        <img src="images/unnamed.png" class="imgSize">
-    </div>
+    <div class="logo"><h1>Skočko</h1><img src="images/skocko.png" class="logo-size"></div> 
     <div class="column-1">
         <table>
             <tr>
@@ -140,7 +137,13 @@
         <a onclick="calculate()" class="confirm btn btn-5">Potvrdi ?</a>
         <a onclick="newGame()" class="btn btn-5" style="margin-left: 1%;">Nova Igra</a>
     </div>
-    <audio class="audio" src="sounds/buttonSound.wav"></audio>
+    <div class="footer">
+        <span class="footer-text">Copyright ©️ <a href="https://www.instagram.com/beciroviccdzenan/" target="_blank" class="footer-text link">Dženan Bećirović</a> 
+            | <a href="https://github.com/maglichito/Skocko-Slagalica" target="_blank" class="footer-text link">Source Code</a></span>
+    </div>
+    <audio class="buttonSound" src="sounds/buttonSound.wav"></audio>
+    <audio class="correctSound" src="sounds/correctAnswer.wav"></audio>
+    <audio class="loseSound" src="sounds/loseSound.wav"></audio>
     <script src="script.js"></script>
 </body>
 

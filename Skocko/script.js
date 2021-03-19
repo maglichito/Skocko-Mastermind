@@ -1,19 +1,16 @@
 const $ = e => document.querySelector(e);
 const $$ = d => document.querySelectorAll(d);
 
-
 const leftColumn = $$('.column-left');
-const rightColumn = $$('.column-right');
+const rightColumn = $$('.column-right');                                           
 const images = $$('.symbol');
 const finalCombination = $$('.column-final');
 const trash = $('.trash');
 const confirm = $('.confirm');
 
-
 const randomCombination = new Array(4);
 const userCombination = new Array(4);
 const copyOfRandom = new Array(4);
-
 
 var indexLeft = 0;
 var indexRight = 0;
@@ -21,8 +18,8 @@ var indexBefore = 0;
 var ifEnd = false;
 
 // Play audio
-const playAudio = function () {
-    var audio = $(".audio");
+function playAudio (audio) {
+    var audio = $(`.${audio}`);
     audio.volume = .3;
     audio.play();
 }
@@ -32,10 +29,9 @@ const resetColumns = function (column, index) {
     column[index].style.opacity = .2;    
     column[index].style.backgroundColor = "rgb(20, 19, 19)";
 }
-
 // New game
 const newGame = function () {
-    playAudio();
+    playAudio("buttonSound");
 
     indexLeft = 0;
     indexRight = 0;
@@ -51,7 +47,6 @@ const newGame = function () {
     }
     generate();
 }
-
 // Adding symbols
 const addItem = function (column, symbol, index) {
     if (indexLeft < indexBefore + 4) {
@@ -62,10 +57,9 @@ const addItem = function (column, symbol, index) {
         column[index].style.backgroundImage = "url('images/" + symbol + ".png')";
     }
 }
-
 // Deleting symbols
 const deleteItem = function () {
-    playAudio();
+    playAudio("buttonSound");
 
     if (ifEnd === true) {
         alert("Igra je zavresna zapocnite novu igru!");
@@ -92,9 +86,7 @@ const generate = function () {
         randomCombination[i] = randomNumber;
         copyOfRandom[i] = randomNumber;
     }
-    console.log(randomCombination + " DO NOT CHEAT!");
 }
-
 // Filling array for final combination
 const fillFinalCombination = function () {
     for (let i = 0; i < finalCombination.length; i++) {
@@ -122,7 +114,7 @@ const fillFinalCombination = function () {
 }
 // Comparing random generated and user combination
 const calculate = function () {
-    playAudio();
+    playAudio("buttonSound");
     if (ifEnd === true) {
         alert("Igra je zavresna zapocnite novu igru!");
         return;
@@ -144,9 +136,10 @@ const calculate = function () {
     // YELLOW
     for (let i = 0; i < userCombination.length; i++) {
         for (let j = 0; j < copyOfRandom.length; j++) {
-            if (userCombination[i] != -1 && copyOfRandom[j] != -1) {
+            if (userCombination[i] != -1 && copyOfRandom[j] != -1 && userCombination[i] != -2 && copyOfRandom[j] != -2) {
                 if (userCombination[i] === randomCombination[j]) {
                     copyOfRandom[j] = -2;
+                    userCombination[i] = -2;
                     break;
                 }
             }
@@ -154,6 +147,7 @@ const calculate = function () {
     }
     paintRightRow();
     if (indexLeft == leftColumn.length) {
+        playAudio("loseSound");
         ifEnd = true;
         fillFinalCombination();
     }
@@ -164,14 +158,12 @@ const resetArray = function (Array) {
         copyOfRandom[i] = Array[i];
     }
 }
-
 // Helping method for paintRightRow()
 const paint = function (color, index) {
     rightColumn[index].style.backgroundColor = color;
     rightColumn[index].style.opacity = 1;
     rightColumn[index].style.border = "none";
 }
-
 // Paint right row
 const paintRightRow = function () {
     let coloredRed = 0;
@@ -194,11 +186,13 @@ const paintRightRow = function () {
     }
     resetArray(randomCombination);
 
+    // Move to next row and remember row before
     indexBefore += 4;
     indexRight += (4 - colored) + colored;
 
     if (coloredRed === 4) {
         fillFinalCombination();
+        playAudio("correctSound");
         ifEnd = true;
         return;
     }
@@ -216,37 +210,37 @@ images.forEach(element => {
                     addItem(leftColumn, "smiley", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
                 case 1:
                     addItem(leftColumn, "heart", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
                 case 2:
                     addItem(leftColumn, "diamond", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
                 case 3:
                     addItem(leftColumn, "clubs", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
                 case 4:
                     addItem(leftColumn, "spade", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
                 case 5:
                     addItem(leftColumn, "star", indexLeft);
                     indexLeft++;
                     userCombination[indexLeft - 1 - indexBefore] = parseInt(element.getAttribute("value"));
-                    playAudio();
+                    playAudio("buttonSound");
                     break;
             }
         }

@@ -16,7 +16,6 @@ html,body{
 h1{
     text-align: center;
     color: #ADFF2F;
-    margin-top: .5%;
     font-weight: 300;
     font-size: 30px;
 }
@@ -52,26 +51,26 @@ span{
 }
 tr,td{
     color: white;
-    border-radius: 10rem;
-    height: 7vh;
-    width: 4.2rem;
+    border-radius: 50px;
+    height:70px;
+    width: 70px;
 }
 td{
     background-color: rgb(20, 19, 19);
     opacity: .2;
 }
 .imgSize{
-    height: 4vh;
-    width: 2.4rem;
-    margin-top: 2vh;
+    height:50px;
+    width: 50px;
+    margin-top: 20px;
     display: block;
 }
 .logo{
-    margin-top: -2vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    line-height: 50px;
 }
 #floatLeft{
     float: left;
@@ -80,17 +79,16 @@ td{
     color: #ADFF2F;
     cursor: pointer;
     display: block;
-    font-size:23px;
-    font-weight: 400;
+    font-size:17px;
+    font-weight: 100;
     line-height: 45px;
     margin: 0 0 2em;
-    max-width: 160px; 
+    max-width: 120px; 
     position: relative;
     text-decoration: none;
     text-transform: uppercase;
     width: 100%;
     text-align: center; 
-    
 }
   .btn-5 {
     border: 0 solid;
@@ -117,3 +115,23 @@ td{
     -webkit-transform: translateY(5px);
     transform: translateY(5px); 
 }
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(111, 239, 243);
+    text-align: center;
+  }
+  .footer-text{
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    color: black;
+  }
+  .link{
+      color: blue;
+  }
+  .logo-size{
+      height: 35px;
+      width: 35px;
+  }
